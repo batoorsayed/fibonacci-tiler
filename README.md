@@ -73,12 +73,12 @@ The implementation includes several parameters that can be easily adjusted:
 
 ### Known Issues
 
--- TODO: Make MAIN_RATIO, MARGIN, GAP configurable
--- TODO: Find reliable way to get the geometry of the *monitor* containing the window
--- TODO: Handle minimized/restored windows more gracefully (see proposed_minimization_handling)
--- TODO: Only write window list file if changes occurred (added/removed window)
--- TODO: Find a less disruptive way to trigger devilspie2 layout refresh than wmctrl -ia loop
--- TODO: Implement logging for debugging purposes
+- TODO: Make MAIN_RATIO, MARGIN, GAP configurable
+- TODO: Find reliable way to get the geometry of the *monitor* containing the window
+- TODO: Handle minimized/restored windows more gracefully (see proposed_minimization_handling)
+- TODO: Only write window list file if changes occurred (added/removed window)
+- TODO: Find a less disruptive way to trigger devilspie2 layout refresh than wmctrl -ia loop
+- TODO: Implement logging for debugging purposes
 
 ### License
 
