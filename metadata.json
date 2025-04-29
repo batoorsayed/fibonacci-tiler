@@ -1,0 +1,10 @@
+{
+    "uuid": "fibonacci-layout@batoorsayed",
+    "name": "Fibonacci Layout",
+    "description": "Toggle Fibonacci window layout for the current workspace",
+    "max-instances": -1,
+    "version": "0.1"
+    //"cinnamon-version": ["3.0", "3.2", "3.4", "3.6", "3.8", "4.0", "4.2", "4.4", "4.6", "4.8", "5.0", "5.2", "5.4", "5.6", "5.8", "6.0"]
+}
+
+

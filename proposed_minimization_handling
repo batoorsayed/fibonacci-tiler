@@ -1,0 +1,64 @@
+-- [[ Add this block after the initial skip checks ]] --
+-- Check if the window is minimized (requires a reliable method)
+-- Example using xprop via run_external_command (Needs testing!)
+local is_minimized = false
+local state_cmd = "xprop -id " .. window_xid .. " _NET_WM_STATE"
+local window_state_output = run_external_command(state_cmd)
+if window_state_output and string.match(window_state_output, "_NET_WM_STATE_HIDDEN") then
+    debug_print("Window " .. window_xid .. " is minimized.")
+    is_minimized = true
+
+    -- Read the current window list *only* to remove the minimized window
+    local current_windows = {}
+    local windows_file_path = os.getenv("HOME") .. "/.local/share/fibonacci-layout/workspace_" .. window_workspace .. "_windows"
+    local f_read = io.open(windows_file_path, "r")
+    if f_read then
+        for line in f_read:lines() do
+            local id = tonumber(line)
+            if id and id ~= window_xid then -- Add all windows *except* the minimized one
+                table.insert(current_windows, id)
+            end
+        end
+        f_read:close()
+
+        -- Save the updated list (without the minimized window)
+        local f_write = io.open(windows_file_path, "w")
+        if f_write then
+            for _, id in ipairs(current_windows) do
+                f_write:write(tostring(id) .. "\n")
+            end
+            f_write:close()
+            debug_print("Removed minimized window " .. window_xid .. " from list and saved.")
+        else
+            debug_print("Error: Could not open " .. windows_file_path .. " for writing to remove minimized window.")
+            -- Handle error appropriately
+        end
+    else
+         debug_print("Warning: Could not open " .. windows_file_path .. " for reading to remove minimized window.")
+    end
+    return -- Stop processing this minimized window
+end
+-- [[ End of added block ]] --
+
+-- Get list of windows on this workspace (existing code follows)
+local windows_file = os.getenv("HOME") .. "/.local/share/fibonacci-layout/workspace_" .. window_workspace .. "_windows"
+local windows = {}
+-- ... (rest of the window list reading logic) ...
+
+-- [[ Modify the file saving logic at the end of the "if is_new_window then" block ]] --
+if is_new_window then
+    table.insert(windows, 1, window_xid)
+
+    -- Save updated window list (use error checking)
+    local f = io.open(windows_file, "w")
+    if f then
+        for _, id in ipairs(windows) do
+            f:write(tostring(id) .. "\n")
+        end
+        f:close()
+        debug_print("Added new window " .. window_xid .. " and saved list.")
+    else
+        debug_print("Error: Could not open " .. windows_file .. " for writing after adding new window.")
+        -- Handle error
+    end
+end -- No need for a separate save_window_list function

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Fibonacci Layout
+Comment=Start Fibonacci Layout window manager
+Exec=devilspie2
+# Exec=/bin/bash -c "sleep 3 && ~/.local/bin/fibonacci-layout-startup.sh"
+StartupNotify=false
+Terminal=false
