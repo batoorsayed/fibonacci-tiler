@@ -1,3 +1,6 @@
+# Deprecated. It turns out its easier to use already built tools than trying to build one.
+
+
 # fibonacci-tiler
 
 A lightweight Fibonacci window layout system for Linux Mint Cinnamon (thats what I intended to use) that maintains full compatibility with the existing desktop environment.
